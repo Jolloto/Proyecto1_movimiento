@@ -8,10 +8,8 @@ public class Follow_Player : MonoBehaviour
     [SerializeField] private Vector3 offset = new Vector3(x: 0, y: 5, z: -10);
 
 
-    private void Update() 
+    private void LateUpdate() 
     {
         transform.position = player.transform.position + offset;
-
-    
     }
 }

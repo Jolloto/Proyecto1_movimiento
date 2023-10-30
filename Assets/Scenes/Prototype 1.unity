@@ -1357,7 +1357,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a174720b4806d34384516be62be5ef9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
+  player: {fileID: 1280603461}
   offset: {x: 0, y: 5, z: -10}
 --- !u!1001 &539256962
 PrefabInstance:
@@ -3144,10 +3144,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5608da78beb4ebf42aeb152dd008a1ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  camera: {fileID: 534669902}
-  speed: 20
-  lateralspeed: 20
-  offset: {x: 0, y: 5, z: -10}
+  speed: 15
+  lateralspeed: 15
 --- !u!54 &1280603467
 Rigidbody:
   m_ObjectHideFlags: 0

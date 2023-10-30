@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class Movement : MonoBehaviour
 {
-    [SerializeField] private GameObject camera;
+    //[SerializeField] private GameObject camera;
 
     [SerializeField] private float speed = 10.0f;
-    [SerializeField] private float lateralspeed;
+    [SerializeField] private float lateralspeed = 5f;
 
-    [SerializeField] private Vector3 offset = new Vector3(x:0, y:5, z:-10);
+    //[SerializeField] private Vector3 offset = new Vector3(0, 5, -10);
     
 
     private float horizontalInput;
@@ -19,6 +19,7 @@ public class Movement : MonoBehaviour
     {
         //La detección de inputs debe ir en el Update
         horizontalInput = Input.GetAxis("Horizontal");
+        verticalInput = Input.GetAxis("Vertical"); 
         Debug.Log(horizontalInput);
 
 
@@ -32,12 +33,19 @@ public class Movement : MonoBehaviour
 
         // Movimiento en función del sistema de coordenadas local (el del objeto)
         // Movimiento hacia adelante automático
-        //transform.Translate(translation:Vector3.forward * speed * Time.deltaTime);
+        //transform.Translate(Vector3.forward * speed * Time.deltaTime);
 
         // Movimiento hacia adelante afectado por el input del usuario (vertical)
-        transform.Translate(translation:Vector3.forward * speed * Time.deltaTime);
+        transform.Translate(translation:Vector3.forward * speed * Time.deltaTime * verticalInput);
 
-        // Movimiento lateral afectado por el input
-        transform.Translate(translation:Vector3.right * lateralspeed * Time.deltaTime * horizontalInput);
+        // Movimiento lateral afectado por el input del usuario (horizontal)
+        // transform.Translate(Vector3.right * lateralspeed * Time.deltaTime * horizontalInput);
+
+        transform.Rotate(Vector3.up, lateralspeed * Time.deltaTime * horizontalInput);
+
+
+
+        // camera.transform.position = transform.position + offset;
+
     }
 }
