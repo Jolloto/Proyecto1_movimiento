@@ -8,19 +8,41 @@ public class Movement : MonoBehaviour
 
     [SerializeField] private float speed = 10.0f;
     [SerializeField] private float lateralspeed = 5f;
+    private int lives;
+    private bool isGameOver;
+    private Vector3 initialPosition;
 
     //[SerializeField] private Vector3 offset = new Vector3(0, 5, -10);
-    
+
 
     private float horizontalInput;
     private float verticalInput;
 
-       void Update()
+    private void Awake()
+    {
+        lives = 3;
+        isGameOver = false;
+        initialPosition = Vector3.zero;
+    }
+    void Update()
     {
         //La detección de inputs debe ir en el Update
         horizontalInput = Input.GetAxis("Horizontal");
-        verticalInput = Input.GetAxis("Vertical"); 
-        Debug.Log(horizontalInput);
+        verticalInput = Input.GetAxis("Vertical");
+
+        if (transform.position.y < -3)
+        {
+            lives--;
+            if (lives == 0)
+            {
+                isGameOver = true;
+            }
+            else
+            {
+                transform.position = initialPosition;
+            }
+        }
+       
 
 
         // Recomendación si trabajamos con direcciones, que sean vector
