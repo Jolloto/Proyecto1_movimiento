@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Movement : MonoBehaviour
 {
@@ -11,6 +12,7 @@ public class Movement : MonoBehaviour
     private int lives;
     private bool isGameOver;
     private Vector3 initialPosition;
+    private UIManager uiManager;
 
     //[SerializeField] private Vector3 offset = new Vector3(0, 5, -10);
 
@@ -23,6 +25,8 @@ public class Movement : MonoBehaviour
         lives = 3;
         isGameOver = false;
         initialPosition = Vector3.zero;
+        uiManager = FindObjectOfType<UIManager>();
+        uiManager.HideGameOverPanel();
     }
     void Update()
     {
@@ -35,14 +39,25 @@ public class Movement : MonoBehaviour
             lives--;
             if (lives == 0)
             {
+                uiManager.UpdateLiveText(lives);
                 isGameOver = true;
+                uiManager.ShowGameOverPanel(lives);
             }
             else
             {
+                transform.rotation = Quaternion.identity;
                 transform.position = initialPosition;
             }
         }
        
+
+
+       
+
+        // Movimiento hacia adelante afectado por el input del usuario (vertical)
+        transform.Translate(translation:Vector3.forward * speed * Time.deltaTime * verticalInput);
+
+        transform.Rotate(Vector3.up, lateralspeed * Time.deltaTime * horizontalInput);
 
 
         // Recomendación si trabajamos con direcciones, que sean vector
@@ -57,17 +72,14 @@ public class Movement : MonoBehaviour
         // Movimiento hacia adelante automático
         //transform.Translate(Vector3.forward * speed * Time.deltaTime);
 
-        // Movimiento hacia adelante afectado por el input del usuario (vertical)
-        transform.Translate(translation:Vector3.forward * speed * Time.deltaTime * verticalInput);
-
         // Movimiento lateral afectado por el input del usuario (horizontal)
         // transform.Translate(Vector3.right * lateralspeed * Time.deltaTime * horizontalInput);
 
-        transform.Rotate(Vector3.up, lateralspeed * Time.deltaTime * horizontalInput);
-
-
-
         // camera.transform.position = transform.position + offset;
+    }
 
+    public void Restart() 
+    {
+        SceneManager.LoadScene("Prototype 1");
     }
 }
