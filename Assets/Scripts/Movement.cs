@@ -13,6 +13,7 @@ public class Movement : MonoBehaviour
     private bool isGameOver;
     private Vector3 initialPosition;
     private UIManager uiManager;
+    
 
     //[SerializeField] private Vector3 offset = new Vector3(0, 5, -10);
 
@@ -37,9 +38,13 @@ public class Movement : MonoBehaviour
         if (transform.position.y < -3)
         {
             lives--;
+            uiManager.UpdateLiveText(lives);
+            
+
             if (lives == 0)
             {
-                uiManager.UpdateLiveText(lives);
+                
+               
                 isGameOver = true;
                 uiManager.ShowGameOverPanel(lives);
             }

@@ -22,6 +22,6 @@ public class UIManager : MonoBehaviour
 
     public void UpdateLiveText(int lives) 
     {
-        livesText.text = $"{lives}";
+        livesText.text = $"Lives: {lives}";
     }
 }
